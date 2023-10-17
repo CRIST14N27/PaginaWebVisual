@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PaginaWebCSharp.Models;
+using PaginaWebCSharp.Services;
 using System.Net;
 using System.Net.Mail;
 
@@ -7,6 +8,13 @@ namespace PaginaWebCSharp.Controllers
 {
     public class FormulariosController : Controller
     {
+        private readonly IEmailService _emailService;
+
+        public FormulariosController(IEmailService emailService)
+        {
+            _emailService = emailService;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -37,6 +45,16 @@ namespace PaginaWebCSharp.Controllers
             TempData["FechaNacimiento"] = model.FechaNacimiento;
             TempData["TurnoSelect"] = model.TurnoSelect;
             TempData["Comentario"] = model.Comentario;
+
+            _emailService.SendEmailWithData(
+                new EmailData()
+                {
+                    Email = model.Email,
+                    Subject = "Notificacion de Correo",
+                    Content = model.Comentario,
+
+                }
+                );
 
             SendEmail(model);
             return View("Contacto", model);

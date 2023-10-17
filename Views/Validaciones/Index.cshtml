@@ -1,0 +1,58 @@
+﻿@model PaginaWebCSharp.Models.Curriculum
+
+<div class="row">
+    @if (TempData["msj"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["msj"]
+        </div>
+    }
+
+    <div class="col-12">
+        <div class="card-header bg-primary text-white">
+            <h2 class="text-center">Envio de informacion</h2>
+            <p class="text-center">Favor de rellenar todos los campos requeridos para enviar la información</p>
+
+        </div>
+    </div>
+    <div class="col-8">
+        <form asp-action="EnviarInformacion" asp-controller="Validaciones" method="post">
+            <div class="mb-3">
+                <label class="col-form-label">Nombre:</label>
+                <input type="email" asp-for="Nombre" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="col-form-label">Apellido</label>
+                <input type="email" asp-for="Apellidos" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="col-form-label">Email</label>
+                <input type="email" asp-for="Email" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="col-form-label">CURP</label>
+                <input type="text" asp-for="CURP" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="col-form-label">Ingles</label>
+                <input type="number" asp-for="PorcentajeIngles" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="col-form-label">Foto</label>
+                <input type="file" asp-for="Foto" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="col-form-label">Direccion</label>
+                <textarea name="Direccion" rows="4" cols="50"></textarea>
+
+            </div>
+            <div class="mb-3">
+                <label class="col-form-label">Comentario</label>
+                <textarea name="Comentario" rows="4" cols="50"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Enviar</button>
+        </form>
+
+    </div>
+</div>
+
